@@ -8,6 +8,6 @@ public class CompanyManagerAppContext : DbContext
     public CompanyManagerAppContext(DbContextOptions options)
         : base(options) { }
 
-    public DbSet<Employee> Employees { get; set; }
-    public DbSet<Department> Departments { get; set; }
+    public DbSet<Employee> Employees { get; set; } = null!;
+    public DbSet<Department> Departments { get; set; } = null!;
 }

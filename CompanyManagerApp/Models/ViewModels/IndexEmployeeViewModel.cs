@@ -1,5 +1,3 @@
-using CompanyManagerApp.Models.Domain;
-
 namespace CompanyManagerApp.Models.ViewModels;
 
 public class IndexEmployeeViewModel

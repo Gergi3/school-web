@@ -23,9 +23,9 @@ insert_final_newline = true
 indent_size = 4
 dotnet_sort_system_directives_first = true
 
-# Don't use this. qualifier
-dotnet_style_qualification_for_field = false:suggestion
-dotnet_style_qualification_for_property = false:suggestion
+# Use this. qualifier
+dotnet_style_qualification_for_field = true:warning
+dotnet_style_qualification_for_property = true:warning
 
 # use int x = .. over Int32
 dotnet_style_predefined_type_for_locals_parameters_members = true:suggestion
@@ -83,6 +83,8 @@ csharp_style_expression_bodied_operators = false:silent
 csharp_style_expression_bodied_properties = true:silent
 csharp_style_expression_bodied_indexers = true:silent
 csharp_style_expression_bodied_accessors = true:silent
+csharp_style_expression_bodied_lambdas = true:silent
+csharp_style_expression_bodied_local_functions = false:silent
 
 [*.{xml,config,*proj,nuspec,props,resx,targets,yml,tasks}]
 indent_size = 2
@@ -414,7 +416,7 @@ dotnet_diagnostic.CA1857.severity = suggestion
 # CA1858: Use 'StartsWith' instead of 'IndexOf'
 dotnet_diagnostic.CA1858.severity = suggestion
 # CA2007: Consider calling ConfigureAwait on the awaited task
-dotnet_diagnostic.CA2007.severity = suggestion
+dotnet_diagnostic.CA2007.severity = none
 # CA2008: Do not create tasks without passing a TaskScheduler
 dotnet_diagnostic.CA2008.severity = suggestion
 # CA2012: Use ValueTask correctly
@@ -474,3 +476,15 @@ dotnet_style_operator_placement_when_wrapping = beginning_of_line
 tab_width = 4
 indent_size = 4
 end_of_line = crlf
+dotnet_style_coalesce_expression = true:suggestion
+dotnet_style_null_propagation = true:suggestion
+dotnet_style_prefer_is_null_check_over_reference_equality_method = true:suggestion
+dotnet_style_prefer_auto_properties = true:silent
+dotnet_style_object_initializer = true:suggestion
+dotnet_style_prefer_collection_expression = true:suggestion
+dotnet_style_collection_initializer = true:suggestion
+dotnet_style_prefer_simplified_boolean_expressions = true:suggestion
+dotnet_style_qualification_for_field = false:suggestion
+dotnet_style_qualification_for_property = false:suggestion
+dotnet_style_qualification_for_method = true:warning
+dotnet_style_qualification_for_event = true:warning

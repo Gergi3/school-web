@@ -1,3 +1,6 @@
+using CompanyManagerApp.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace CompanyManagerApp;
 
 public class Program
@@ -7,7 +10,13 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
+        builder.Services.AddRouting(options => options.LowercaseUrls = true);
         builder.Services.AddControllersWithViews();
+
+        // Add context to the container
+        builder.Services.AddDbContext<CompanyManagerAppContext>(
+            options => options.UseSqlServer(builder.Configuration.GetConnectionString("CompanyManagerApp"))
+        );
 
         var app = builder.Build();
 
@@ -28,7 +37,7 @@ public class Program
 
         app.MapControllerRoute(
             name: "default",
-            pattern: "{controller=Home}/{action=Index}/{id?}");
+            pattern: "{controller=Employees}/{action=Index}/{id?}");
 
         app.Run();
     }

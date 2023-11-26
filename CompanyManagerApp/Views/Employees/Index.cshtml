@@ -23,8 +23,8 @@
 					<td>@employee.Id</td>
 					<td>@employee.Name</td>
 					<td>@employee.Email</td>
-					<td>@employee.Salary</td>
-					<td>@employee.DateOfBirth</td>
+					<td>@(Math.Round(employee.Salary, 2)) BGN</td>
+					<td>@employee.DateOfBirth.ToShortDateString()</td>
 					<td>@employee.DepartmentName</td>
 					<td class="employee-redirects">
 						<a href="Employees/View/@employee.Id">

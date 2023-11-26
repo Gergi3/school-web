@@ -17,10 +17,11 @@ public class EmployeesController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string? department = null)
     {
         List<Employee> employees = await this._context.Employees
             .Include(e => e.Department)
+            .Where(x => department == null ? true : x.Department.Code == department)
             .ToListAsync();
 
         HashSet<IndexEmployeeViewModel> employeesViewModel = employees

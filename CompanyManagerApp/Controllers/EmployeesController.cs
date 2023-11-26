@@ -2,6 +2,7 @@ using CompanyManagerApp.Data;
 using CompanyManagerApp.Models.Domain;
 using CompanyManagerApp.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace CompanyManagerApp.Controllers;
@@ -35,5 +36,41 @@ public class EmployeesController : Controller
             .ToHashSet();
 
         return await Task.Run(() => View(employeesViewModel));
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Create()
+    {
+        List<Department> departments = await this._context.Departments.ToListAsync();
+
+        HashSet<SelectListItem> departmentListItems = departments
+            .Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name
+            })
+            .ToHashSet();
+
+        this.ViewBag.DepartmentsList = new SelectList(departmentListItems);
+        return await Task.Run(() => View());
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(CreateEmployeeViewModel employeeViewModel)
+    {
+        Employee employee = new Employee()
+        {
+            Id = new Guid(),
+            Name = employeeViewModel.Name,
+            Email = employeeViewModel.Email,
+            Salary = employeeViewModel.Salary,
+            DateOfBirth = employeeViewModel.DateOfBirth,
+            DepartmentId = employeeViewModel.DepartmentId,
+        };
+
+        await this._context.Employees.AddAsync(employee);
+        await this._context.SaveChangesAsync();
+
+        return await Task.Run(() => this.RedirectToAction("Index"));
     }
 }

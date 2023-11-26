@@ -1,3 +1,6 @@
+using CompanyManagerApp.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace CompanyManagerApp;
 
 public class Program
@@ -8,6 +11,11 @@ public class Program
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
+
+        // Add context to the container
+        builder.Services.AddDbContext<CompanyManagerAppContext>(
+            options => options.UseSqlServer(builder.Configuration.GetConnectionString("CompanyManagerApp"))
+        );
 
         var app = builder.Build();
 

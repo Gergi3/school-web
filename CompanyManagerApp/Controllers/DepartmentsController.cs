@@ -2,7 +2,6 @@ using CompanyManagerApp.Data;
 using CompanyManagerApp.Models.Domain;
 using CompanyManagerApp.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace CompanyManagerApp.Controllers;

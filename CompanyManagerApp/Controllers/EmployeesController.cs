@@ -39,7 +39,6 @@ public class EmployeesController : Controller
     }
 
     [HttpGet]
-    [Route("Employees/{id}")]
     public async Task<IActionResult> View(Guid id)
     {
         var employee = await this._context.Employees.Include(x => x.Department).FirstOrDefaultAsync(x => x.Id == id);
@@ -89,6 +88,56 @@ public class EmployeesController : Controller
         };
 
         await this._context.Employees.AddAsync(employee);
+        await this._context.SaveChangesAsync();
+
+        return await Task.Run(() => this.RedirectToAction("Index"));
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Edit(Guid id)
+    {
+        Employee? employee = await this._context.Employees.FindAsync(id);
+
+        if (employee is null)
+        {
+            return await Task.Run(() => NotFound());
+        }
+
+        EditEmployeeViewModel employeeViewModel = new EditEmployeeViewModel()
+        {
+            Id = employee.Id,
+            Email = employee.Email,
+            Salary = employee.Salary,
+            DateOfBirth = employee.DateOfBirth,
+            Name = employee.Name,
+            DepartmentId = employee.DepartmentId
+        };
+
+        List<Department> departments = await this._context.Departments.ToListAsync();
+        var departmentListItems = departments
+            .Select(x => new { x.Id, x.Name })
+            .ToHashSet();
+
+        this.ViewBag.DepartmentsList = new SelectList(departmentListItems, "Id", "Name", employee.DepartmentId);
+        return await Task.Run(() => View(employeeViewModel));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(EditEmployeeViewModel employeeViewModel)
+    {
+        Employee? employee = await this._context.Employees.FindAsync(employeeViewModel.Id);
+
+        if (employee is null)
+        {
+            return await Task.Run(() => NotFound());
+        }
+
+        employee.Email = employeeViewModel.Email;
+        employee.Salary = employeeViewModel.Salary;
+        employee.DateOfBirth = employeeViewModel.DateOfBirth;
+        employee.Name = employeeViewModel.Name;
+        employee.DepartmentId = employeeViewModel.DepartmentId;
+
         await this._context.SaveChangesAsync();
 
         return await Task.Run(() => this.RedirectToAction("Index"));

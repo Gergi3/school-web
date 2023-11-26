@@ -51,4 +51,55 @@ public class DepartmentsController : Controller
 
         return await Task.Run(() => this.RedirectToAction("Index"));
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Edit(Guid id)
+    {
+        Department? department = await this._context.Departments.FindAsync(id);
+        if (department is null)
+        {
+            return await Task.Run(() => NotFound());
+        }
+
+        EditDepartmentViewModel departmentViewModel = new EditDepartmentViewModel()
+        {
+            Id = id,
+            Name = department.Name,
+            Code = department.Code,
+        };
+
+        return await Task.Run(() => View(departmentViewModel));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(EditDepartmentViewModel departmentViewModel)
+    {
+        Department? department = await this._context.Departments.FindAsync(departmentViewModel.Id);
+        if (department is null)
+        {
+            return await Task.Run(() => NotFound());
+        }
+
+        department.Name = departmentViewModel.Name;
+        department.Code = departmentViewModel.Code;
+
+        await this._context.SaveChangesAsync();
+
+        return await Task.Run(() => this.RedirectToAction("Index"));
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var department = await this._context.Departments.FindAsync(id);
+        if (department is null)
+        {
+            return await Task.Run(() => NotFound());
+        }
+
+        this._context.Departments.Remove(department);
+        await this._context.SaveChangesAsync();
+
+        return await Task.Run(() => this.RedirectToAction("Index"));
+    }
 }

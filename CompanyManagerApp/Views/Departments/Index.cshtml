@@ -1,0 +1,43 @@
+﻿@using CompanyManagerApp.Models.ViewModels
+@{
+	@model HashSet<IndexDepartmentViewModel>
+
+}
+<h1>Departments</h1>
+@if (Model.Count > 0)
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Code</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var department in Model)
+			{
+				<tr>
+					<td>@department.Id</td>
+					<td>@department.Name</td>
+					<td>@department.Code</td>
+					<td>
+						<a href="departments/edit/@department.Id">
+							<i class="fa fa-solid fa-pencil"></i>
+						</a>
+						<a href="departments/delete/@department.Id">
+							<i class="fa fa-solid fa-trash-can"></i>
+						</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+else
+{
+	<h3>No departments yet!</h3>
+}
+<a href="departments/create" class="btn btn-primary">
+	Add Department
+</a>

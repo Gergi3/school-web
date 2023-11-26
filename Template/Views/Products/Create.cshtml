@@ -1,0 +1,30 @@
+﻿@using ProductApp.Models.ViewModels
+@{
+	@model CreateProductViewModel
+}
+<h1>Add Product</h1>
+<form method="post" asp-action="Create" class="mt-5">
+	<div class="mb-3">
+		<label for="name" class="form-label">Name</label>
+		<input type="text" class="form-control" name="name" asp-for="Name" />
+	</div>
+
+	<div class="mb-3">
+		<label for="email" class="form-label">Email</label>
+		<input type="email" class="form-control" name="email" asp-for="Email" />
+	</div>
+
+	<div class="mb-3">
+		<label for="salary" class="form-label">Salary</label>
+		<input type="number" class="form-control" name="salary" asp-for="Salary" />
+	</div>
+
+	<div class="mb-3">
+		<label for="dateOfBirth" class="form-label">Date Of Birth</label>
+		<input type="date" class="form-control" name="dateOfBirth" asp-for="DateOfBirth" />
+	</div>
+
+	<div class="mb-3">
+		<input type="submit" class="btn btn-primary" value="Create" />
+	</div>
+</form>

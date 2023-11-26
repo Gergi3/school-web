@@ -1,0 +1,27 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.redirect-icons a:has(.fa) {
+    color: black;
+    text-decoration: none;
+}
+
+.redirect-icons a:not(:last-child) {
+    margin-right: 10px;
+}

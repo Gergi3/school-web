@@ -23,11 +23,11 @@ public class ProductsController : Controller
         HashSet<IndexProductViewModel> productsViewModel = products
             .Select(x => new IndexProductViewModel()
             {
-                DateOfBirth = x.DateOfBirth,
-                Email = x.Email,
                 Id = x.Id,
                 Name = x.Name,
-                Salary = x.Salary,
+                Price = x.Price,
+                Quantity = x.Quantity,
+                Category = x.Category
             })
             .ToHashSet();
 
@@ -46,10 +46,10 @@ public class ProductsController : Controller
         Product product = new Product()
         {
             Id = new Guid(),
-            Name = productViewModel.Name,
-            Email = productViewModel.Email,
-            Salary = productViewModel.Salary,
-            DateOfBirth = productViewModel.DateOfBirth,
+            Category = productViewModel.Category,
+            Price = productViewModel.Price,
+            Quantity = productViewModel.Quantity,
+            Name = productViewModel.Name
         };
 
         await this._context.Products.AddAsync(product);
@@ -71,10 +71,10 @@ public class ProductsController : Controller
         EditProductViewModel productViewModel = new EditProductViewModel()
         {
             Id = product.Id,
-            Email = product.Email,
-            Salary = product.Salary,
-            DateOfBirth = product.DateOfBirth,
-            Name = product.Name
+            Category = product.Category,
+            Name = product.Name,
+            Quantity = product.Quantity,
+            Price = product.Price
         };
 
         return await Task.Run(() => View(productViewModel));
@@ -90,10 +90,10 @@ public class ProductsController : Controller
             return await Task.Run(() => NotFound());
         }
 
-        product.Email = productViewModel.Email;
-        product.Salary = productViewModel.Salary;
-        product.DateOfBirth = productViewModel.DateOfBirth;
+        product.Category = productViewModel.Category;
         product.Name = productViewModel.Name;
+        product.Quantity = productViewModel.Quantity;
+        product.Price = productViewModel.Price;
 
         await this._context.SaveChangesAsync();
 

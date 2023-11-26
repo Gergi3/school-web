@@ -1,6 +1,8 @@
-﻿@using ProductApp.Models.ViewModels
+﻿@using ProductApp.Enums
+@using ProductApp.Models.ViewModels
 @{
 	@model CreateProductViewModel
+
 }
 <h1>Add Product</h1>
 <form method="post" asp-action="Create" class="mt-5">
@@ -9,19 +11,28 @@
 		<input type="text" class="form-control" name="name" asp-for="Name" />
 	</div>
 
-	<div class="mb-3">
-		<label for="email" class="form-label">Email</label>
-		<input type="email" class="form-control" name="email" asp-for="Email" />
+	<div class="mb-3 form-check">
+		<input type="radio" class="form-check-input" value="@Categories.Clothes" name="Category" asp-for="Category" />
+		<label class="form-check-label" for="Category">@Categories.Clothes</label>
+	</div>
+
+	<div class="mb-3 form-check">
+		<input type="radio" class="form-check-input" value="@Categories.Food" name="Category" asp-for="Category" />
+		<label class="form-check-label" for="Category">@Categories.Food</label>
+	</div>
+
+	<div class="mb-3 form-check">
+		<input type="radio" class="form-check-input" value="@Categories.Cosmetics" name="Category" asp-for="Category" />
+		<label class="form-check-label" for="Category">@Categories.Cosmetics</label>
 	</div>
 
 	<div class="mb-3">
-		<label for="salary" class="form-label">Salary</label>
-		<input type="number" class="form-control" name="salary" asp-for="Salary" />
+		<label for="price" class="form-label">Price</label>
+		<input type="number" class="form-control" name="price" asp-for="Price" />
 	</div>
-
 	<div class="mb-3">
-		<label for="dateOfBirth" class="form-label">Date Of Birth</label>
-		<input type="date" class="form-control" name="dateOfBirth" asp-for="DateOfBirth" />
+		<label for="quantity" class="form-label">Quantity</label>
+		<input type="number" class="form-control" name="quantity" asp-for="Quantity" />
 	</div>
 
 	<div class="mb-3">

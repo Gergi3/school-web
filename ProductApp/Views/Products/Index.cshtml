@@ -10,10 +10,9 @@
 			<tr>
 				<th>Id</th>
 				<th>Name</th>
-				<th>Email</th>
-				<th>Salary</th>
-				<th>Date of birth</th>
-				<th>Department</th>
+				<th>Category</th>
+				<th>Price</th>
+				<th>Quantity</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -23,9 +22,9 @@
 				<tr>
 					<td>@product.Id</td>
 					<td>@product.Name</td>
-					<td>@product.Email</td>
-					<td>@(Math.Round(product.Salary, 2)) BGN</td>
-					<td>@product.DateOfBirth.ToShortDateString()</td>
+					<td>@product.Category</td>
+					<td>@(Math.Round(product.Price, 2)) BGN</td>
+					<td>@product.Quantity</td>
 					<td class="redirect-icons">
 						<a href="products/edit/@product.Id">
 							<i class="fa fa-solid fa-pencil"></i>

@@ -1,7 +1,6 @@
 ﻿@using ProductApp.Models.ViewModels
 @{
 	@model EditProductViewModel
-
 }
 <h1>Edit Product</h1>
 <form method="post" asp-action="Edit" class="mt-5">
@@ -23,12 +22,6 @@
 	<div class="mb-3">
 		<label for="dateOfBirth" class="form-label">Date Of Birth</label>
 		<input type="date" class="form-control" name="dateOfBirth" asp-for="DateOfBirth" />
-	</div>
-
-	<div class="mb-3">
-		<label for="DepartmentId" class="form-label">Department</label>
-		<select class="form-control" name="DepartmentId" asp-items="@ViewBag.DepartmentsList" asp-for="DepartmentId">
-		</select>
 	</div>
 
 	<div class="mb-3">

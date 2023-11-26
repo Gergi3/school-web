@@ -6,17 +6,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ProductApp.Controllers;
 
-public class ProductController : Controller
+public class ProductsController : Controller
 {
     private readonly ProductAppContext _context;
 
-    public ProductController(ProductAppContext context)
+    public ProductsController(ProductAppContext context)
     {
         this._context = context;
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index(string? department = null)
+    public async Task<IActionResult> Index()
     {
         List<Product> products = await this._context.Products.ToListAsync();
 
@@ -32,28 +32,6 @@ public class ProductController : Controller
             .ToHashSet();
 
         return await Task.Run(() => View(productsViewModel));
-    }
-
-    [HttpGet]
-    public async Task<IActionResult> View(Guid id)
-    {
-        var product = await this._context.Products.FindAsync(id);
-
-        if (product is null)
-        {
-            return await Task.Run(() => NotFound());
-        }
-
-        var productViewModel = new ViewProductViewModel()
-        {
-            DateOfBirth = product.DateOfBirth,
-            Email = product.Email,
-            Name = product.Name,
-            Salary = product.Salary,
-            Id = product.Id
-        };
-
-        return this.View(productViewModel);
     }
 
     [HttpGet]

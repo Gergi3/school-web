@@ -3,7 +3,7 @@
 	@model CreateProductViewModel
 }
 <h1>Add Product</h1>
-<form method="post" action="Create" class="mt-5">
+<form method="post" asp-action="Create" class="mt-5">
 	<div class="mb-3">
 		<label for="name" class="form-label">Name</label>
 		<input type="text" class="form-control" name="name" asp-for="Name" />
@@ -22,12 +22,6 @@
 	<div class="mb-3">
 		<label for="dateOfBirth" class="form-label">Date Of Birth</label>
 		<input type="date" class="form-control" name="dateOfBirth" asp-for="DateOfBirth" />
-	</div>
-
-	<div class="mb-3">
-		<label for="DepartmentId" class="form-label">Department</label>
-		<select class="form-control" name="DepartmentId" asp-items="@ViewBag.DepartmentsList" asp-for="DepartmentId">
-		</select>
 	</div>
 
 	<div class="mb-3">

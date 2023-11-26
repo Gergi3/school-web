@@ -39,6 +39,30 @@ public class EmployeesController : Controller
     }
 
     [HttpGet]
+    [Route("Employees/{id}")]
+    public async Task<IActionResult> View(Guid id)
+    {
+        var employee = await this._context.Employees.Include(x => x.Department).FirstOrDefaultAsync(x => x.Id == id);
+
+        if (employee is null)
+        {
+            return await Task.Run(() => NotFound());
+        }
+
+        var employeeViewModel = new ViewEmployeeViewModel()
+        {
+            DateOfBirth = employee.DateOfBirth,
+            Email = employee.Email,
+            DepartmentName = employee.Department.Name,
+            Name = employee.Name,
+            Salary = employee.Salary,
+            Id = employee.Id
+        };
+
+        return this.View(employeeViewModel);
+    }
+
+    [HttpGet]
     public async Task<IActionResult> Create()
     {
         List<Department> departments = await this._context.Departments.ToListAsync();

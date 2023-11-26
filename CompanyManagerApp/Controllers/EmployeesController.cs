@@ -43,15 +43,11 @@ public class EmployeesController : Controller
     {
         List<Department> departments = await this._context.Departments.ToListAsync();
 
-        HashSet<SelectListItem> departmentListItems = departments
-            .Select(x => new SelectListItem()
-            {
-                Value = x.Id.ToString(),
-                Text = x.Name
-            })
+        var departmentListItems = departments
+            .Select(x => new { x.Id, x.Name })
             .ToHashSet();
 
-        this.ViewBag.DepartmentsList = new SelectList(departmentListItems);
+        this.ViewBag.DepartmentsList = new SelectList(departmentListItems, "Id", "Name");
         return await Task.Run(() => View());
     }
 

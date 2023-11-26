@@ -142,4 +142,19 @@ public class EmployeesController : Controller
 
         return await Task.Run(() => this.RedirectToAction("Index"));
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var employee = await this._context.Employees.FindAsync(id);
+        if (employee is null)
+        {
+            return await Task.Run(() => NotFound());
+        }
+
+        this._context.Employees.Remove(employee);
+        await this._context.SaveChangesAsync();
+
+        return await Task.Run(() => this.RedirectToAction("Index"));
+    }
 }

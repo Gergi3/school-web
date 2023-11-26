@@ -1,0 +1,18 @@
+﻿@using CompanyManagerApp.Models.ViewModels
+@{
+	@model CreateDepartmentViewModel
+}
+<h1>Add Department</h1>
+<form asp-action="Create" class="mt-5">
+	<div class="mb-3">
+		<label for="name" class="form-label">Name</label>
+		<input type="text" class="form-control" name="name" asp-for="Name" />
+	</div>
+	<div class="mb-3">
+		<label for="code" class="form-label">Code</label>
+		<input type="code" class="form-control" name="code" asp-for="Code" />
+	</div>
+	<div class="mb-3">
+		<input type="submit" class="btn btn-primary" value="Create" />
+	</div>
+</form>

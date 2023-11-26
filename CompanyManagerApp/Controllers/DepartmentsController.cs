@@ -2,6 +2,7 @@ using CompanyManagerApp.Data;
 using CompanyManagerApp.Models.Domain;
 using CompanyManagerApp.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace CompanyManagerApp.Controllers;
@@ -28,5 +29,27 @@ public class DepartmentsController : Controller
             .ToHashSet();
 
         return await Task.Run(() => View(departmentsViewModels));
+    }
+
+    [HttpGet]
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(CreateDepartmentViewModel departmentViewModel)
+    {
+        Department department = new Department()
+        {
+            Id = new Guid(),
+            Name = departmentViewModel.Name,
+            Code = departmentViewModel.Code
+        };
+
+        await this._context.Departments.AddAsync(department);
+        await this._context.SaveChangesAsync();
+
+        return await Task.Run(() => this.RedirectToAction("Index"));
     }
 }

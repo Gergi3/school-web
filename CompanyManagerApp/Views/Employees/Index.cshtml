@@ -14,6 +14,7 @@
 				<th>Salary</th>
 				<th>Date of birth</th>
 				<th>Department</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -26,14 +27,14 @@
 					<td>@(Math.Round(employee.Salary, 2)) BGN</td>
 					<td>@employee.DateOfBirth.ToShortDateString()</td>
 					<td>@employee.DepartmentName</td>
-					<td class="employee-redirects">
-						<a href="Employees/View/@employee.Id">
+					<td class="redirect-icons">
+						<a href="employees/@employee.Id">
 							<i class="fa fa-regular fa-eye"></i>
 						</a>
-						<a href="Employees/Edit/@employee.Id">
+						<a href="employees/edit/@employee.Id">
 							<i class="fa fa-solid fa-pencil"></i>
 						</a>
-						<a href="Employees/Delete/@employee.Id">
+						<a href="employees/delete/@employee.Id">
 							<i class="fa fa-solid fa-trash-can"></i>
 						</a>
 					</td>

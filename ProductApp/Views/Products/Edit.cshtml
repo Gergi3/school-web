@@ -3,9 +3,9 @@
 @{
 	@model EditProductViewModel
 }
-
-<h1>Edit Product</h1>
 <form method="post" asp-action="Edit" class="mt-5">
+	<h1>Add Product</h1>
+	<hr />
 	<div class="mb-3">
 		<label for="name" class="form-label">Name</label>
 		<input type="text" class="form-control" name="name" asp-for="Name" />
@@ -36,6 +36,6 @@
 	</div>
 
 	<div class="mb-3">
-		<input type="submit" class="btn btn-primary" value="Edit" />
+		<input type="submit" class="btn-100w btn btn-primary" value="Edit" />
 	</div>
 </form>

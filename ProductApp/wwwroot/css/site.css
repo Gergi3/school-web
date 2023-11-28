@@ -25,3 +25,11 @@ body {
 .redirect-icons a:not(:last-child) {
     margin-right: 10px;
 }
+
+.btn-100w {
+    width: 100%;
+}
+
+.products-table .products-table-thead {
+    background-color: #E5E5E5;
+}

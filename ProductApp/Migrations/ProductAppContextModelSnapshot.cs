@@ -37,6 +37,7 @@ namespace ProductApp.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<decimal>("Price")
+                        .HasPrecision(2)
                         .HasColumnType("money");
 
                     b.Property<int>("Quantity")

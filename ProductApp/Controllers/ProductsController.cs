@@ -71,9 +71,6 @@ public class ProductsController : Controller
         EditProductViewModel productViewModel = new EditProductViewModel()
         {
             Id = product.Id,
-            Category = product.Category,
-            Name = product.Name,
-            Quantity = product.Quantity,
             Price = product.Price
         };
 
@@ -90,9 +87,6 @@ public class ProductsController : Controller
             return await Task.Run(() => NotFound());
         }
 
-        product.Category = productViewModel.Category;
-        product.Name = productViewModel.Name;
-        product.Quantity = productViewModel.Quantity;
         product.Price = productViewModel.Price;
 
         await this._context.SaveChangesAsync();

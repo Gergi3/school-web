@@ -8,7 +8,16 @@
 	<hr />
 	<div class="mb-3">
 		<label for="price" class="form-label">Price</label>
-		<input type="number" class="form-control" name="price" asp-for="Price" />
+		<input
+			type="number"
+			class="form-control"
+			name="price"
+			asp-for="Price"
+			min="0"
+			step="0.01"
+			pattern="^\d+(?:\.\d{1,2})?$"
+			value="@Math.Round(Model.Price, 2)"
+		/>
 	</div>
 	<div class="mb-3">
 		<input type="submit" class="btn-100w btn btn-primary" value="Edit" />

@@ -9,9 +9,4 @@ public class ProductAppContext : DbContext
         : base(options) { }
 
     public DbSet<Product> Products { get; set; } = null!;
-    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
-    {
-        configurationBuilder.Properties<decimal>()
-            .HavePrecision(2);
-    }
 }

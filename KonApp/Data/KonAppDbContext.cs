@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KonApp.Data;
 
-public class ApplicationDbContext : IdentityDbContext
+public class KonAppDbContext : IdentityDbContext
 {
-	public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+	public KonAppDbContext(DbContextOptions<KonAppDbContext> options)
 		: base(options)
 	{
 	}

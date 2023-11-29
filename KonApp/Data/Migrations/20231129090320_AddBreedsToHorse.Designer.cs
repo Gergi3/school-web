@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KonApp.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(KonAppDbContext))]
     [Migration("20231129090320_AddBreedsToHorse")]
     partial class AddBreedsToHorse
     {

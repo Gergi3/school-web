@@ -11,7 +11,7 @@ namespace KonApp
 			var builder = WebApplication.CreateBuilder(args);
 
 			// Add services to the container.
-			string connStringName = "KonAppConnectionString"
+			string connStringName = "KonAppConnectionString";
 			var connectionString = builder.Configuration.GetConnectionString(connStringName) ?? throw new InvalidOperationException($"Connection string '{connStringName}' not found.");
 			builder.Services.AddDbContext<KonAppDbContext>(options =>
 				options.UseSqlServer(connectionString));

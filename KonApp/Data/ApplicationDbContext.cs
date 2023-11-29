@@ -11,4 +11,6 @@ public class ApplicationDbContext : IdentityDbContext
 	{
 	}
 
+	public DbSet<Breed> Breeds { get; set; }
+	public DbSet<Horse> Horses { get; set; }
 }

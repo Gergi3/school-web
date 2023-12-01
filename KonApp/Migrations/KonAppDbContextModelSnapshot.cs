@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace KonApp.Data.Migrations
+namespace KonApp.Migrations
 {
     [DbContext(typeof(KonAppDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    partial class KonAppDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -24,11 +24,9 @@ namespace KonApp.Data.Migrations
 
             modelBuilder.Entity("KonApp.Models.Domain.Breed", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -42,17 +40,15 @@ namespace KonApp.Data.Migrations
 
             modelBuilder.Entity("KonApp.Models.Domain.Horse", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<int>("BreedId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("BreedId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -275,7 +271,7 @@ namespace KonApp.Data.Migrations
             modelBuilder.Entity("KonApp.Models.Domain.Horse", b =>
                 {
                     b.HasOne("KonApp.Models.Domain.Breed", "Breed")
-                        .WithMany()
+                        .WithMany("Horses")
                         .HasForeignKey("BreedId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -332,6 +328,11 @@ namespace KonApp.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("KonApp.Models.Domain.Breed", b =>
+                {
+                    b.Navigation("Horses");
                 });
 #pragma warning restore 612, 618
         }

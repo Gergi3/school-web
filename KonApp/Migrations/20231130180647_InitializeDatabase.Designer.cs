@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace KonApp.Data.Migrations
+namespace KonApp.Migrations
 {
     [DbContext(typeof(KonAppDbContext))]
-    [Migration("20231129083129_AddBreedsAndHorses")]
-    partial class AddBreedsAndHorses
+    [Migration("20231130180647_InitializeDatabase")]
+    partial class InitializeDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,9 @@ namespace KonApp.Data.Migrations
 
             modelBuilder.Entity("KonApp.Models.Domain.Breed", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -45,14 +43,15 @@ namespace KonApp.Data.Migrations
 
             modelBuilder.Entity("KonApp.Models.Domain.Horse", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("BreedId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -64,6 +63,8 @@ namespace KonApp.Data.Migrations
                         .HasColumnType("nvarchar(10)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BreedId");
 
                     b.ToTable("Horses");
                 });
@@ -270,6 +271,17 @@ namespace KonApp.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("KonApp.Models.Domain.Horse", b =>
+                {
+                    b.HasOne("KonApp.Models.Domain.Breed", "Breed")
+                        .WithMany("Horses")
+                        .HasForeignKey("BreedId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Breed");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -319,6 +331,11 @@ namespace KonApp.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("KonApp.Models.Domain.Breed", b =>
+                {
+                    b.Navigation("Horses");
                 });
 #pragma warning restore 612, 618
         }

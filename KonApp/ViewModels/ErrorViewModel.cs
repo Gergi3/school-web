@@ -1,4 +1,4 @@
-namespace KonApp.Models;
+namespace KonApp.ViewModels;
 
 public class ErrorViewModel
 {

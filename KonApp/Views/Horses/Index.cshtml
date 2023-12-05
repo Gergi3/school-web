@@ -1,0 +1,55 @@
+﻿@using KonApp.ViewModels
+@model IEnumerable<HorseViewModel>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Horses</h1>
+<hr />
+<a class="btn btn-primary" asp-action="Create">Create New</a>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Name)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Age)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ImageUrl)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Breed)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Age)
+				</td>
+				<td>
+					<img src="@item.ImageUrl" />
+				</td>
+				<td>
+					<a asp-action="Details" asp-controller="Breeds" asp-route-id="@item.Breed.Id">
+						@Html.DisplayFor(modelItem => item.Breed.Name)
+					</a>
+				</td>
+				<td>
+					<a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+					<a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+					<a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

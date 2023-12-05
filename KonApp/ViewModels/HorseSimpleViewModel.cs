@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KonApp.ViewModels;
 
-public class HorseViewModel
+public class HorseSimpleViewModel
 {
 	public Guid Id { get; set; }
 
@@ -17,5 +17,5 @@ public class HorseViewModel
 	[Required, RegularExpression(Regexes.URL_REGEX)]
 	public string ImageUrl { get; set; } = null!;
 
-	public BreedViewModel Breed { get; set; } = null!;
+	public Guid BreedId { get; set; }
 }

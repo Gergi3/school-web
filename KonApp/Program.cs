@@ -17,10 +17,14 @@ public class Program
 			options.UseSqlServer(connectionString));
 		builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-		builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-			.AddEntityFrameworkStores<KonAppDbContext>();
-		builder.Services.AddControllersWithViews();
 
+
+		builder.Services.AddDefaultIdentity<IdentityUser>(options => {
+			options.SignIn.RequireConfirmedAccount = true;
+		})
+			.AddEntityFrameworkStores<KonAppDbContext>();
+
+		builder.Services.AddControllersWithViews();
 		var app = builder.Build();
 
 		// Configure the HTTP request pipeline.

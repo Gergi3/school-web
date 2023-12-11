@@ -1,4 +1,5 @@
 using KonApp.Data;
+using KonApp.Models.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,9 +18,7 @@ public class Program
 			options.UseSqlServer(connectionString));
 		builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-
-
-		builder.Services.AddDefaultIdentity<IdentityUser>(options => {
+		builder.Services.AddDefaultIdentity<User>(options => {
 			options.SignIn.RequireConfirmedAccount = true;
 		})
 			.AddEntityFrameworkStores<KonAppDbContext>();

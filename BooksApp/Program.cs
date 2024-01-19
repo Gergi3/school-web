@@ -1,5 +1,4 @@
-using BooksApp.Data;
-using Microsoft.AspNetCore.Identity;
+using BooksApp.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,13 +6,13 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionStringIdentifier = "BooksAppConnectionString";
 var connectionString = builder.Configuration.GetConnectionString(connectionStringIdentifier)
 	?? throw new InvalidOperationException($"Connection string '{connectionStringIdentifier}' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options
+builder.Services.AddDbContext<Context>(options
 	=> options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options
-	=> options.SignIn.RequireConfirmedAccount = true)
-	.AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
+	.AddRoles<Role>()
+	.AddEntityFrameworkStores<Context>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

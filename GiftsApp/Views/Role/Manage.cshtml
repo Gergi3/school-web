@@ -1,0 +1,40 @@
+﻿@using GiftsApp.Models.Entities
+@using GiftsApp.ViewModels
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> _userManager;
+@model ManageRoleViewModel
+@{
+	ViewData["Title"] = "Менижиране на роля";
+	List<User> users = ViewBag.UsersList as List<User>;
+}
+
+<h1>@ViewData["Title"]:</h1>
+<h2>@Model.RoleName</h2>
+<div class="row">
+	<div class="col-12">
+		<form asp-action="Manage">
+			@for (int i = 0; i < users.Count; i++)
+			{
+				var isChecked = await this._userManager.IsInRoleAsync(users[i], Model.RoleName);
+
+				<input type="checkbox" checked="@isChecked" asp-for="@Model.UserIds[i].IsChecked" class="form-check-input" />
+				<label class="form-check-label" asp-for="@Model.UserIds[i].IsChecked">
+					@users[i].Email
+				</label>
+				<input type="hidden" value="@users[i].Id" asp-for="@Model.UserIds[i].Id" />
+				<br />
+			}
+
+			<input type="hidden" asp-for="@Model.RoleId" />
+			<input type="hidden" asp-for="@Model.RoleName" />
+			<input type="submit" class="btn btn-primary"/>
+		</form>
+	</div>
+</div>
+
+@*
+Значи, това view+controller беше най-мъчителната отвратителна тричасова битка с шибаното asp и с шибаните роли.
+Искам да отправя своите ОГРОМНИ благодарности на Джанел Мехмед, че помогна на моя милост Георги Петров да разреши този екзистенциален глобално неизвестен проблем.
+Аз ще му купя цветя.
+*@
+

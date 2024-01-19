@@ -1,0 +1,48 @@
+﻿@using GiftsApp.ViewModels
+@model IEnumerable<RoleViewModel>
+
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Управление на роли:</h1>
+
+<form asp-action="Reset" method="post">
+	<input type="submit" class="btn btn-danger" value="Нулиране на роли"/>
+</form>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Id)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Name)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Id)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td>
+					<form method="post">
+						<a class="btn btn-primary" asp-action="Manage" asp-route-id="@item.Id">Менижирай</a>
+                        @if (item.Name != "Administrator")
+                        {
+                            <input type="submit" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" value="Изтрий" />
+                        }
+					</form>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

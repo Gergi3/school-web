@@ -21,6 +21,7 @@ public class Program
 		builder.Services.AddDefaultIdentity<User>(options => {
 			options.SignIn.RequireConfirmedAccount = true;
 		})
+			.AddRoles<IdentityRole<Guid>>()
 			.AddEntityFrameworkStores<KonAppDbContext>();
 
 		builder.Services.AddControllersWithViews();
@@ -43,6 +44,7 @@ public class Program
 
 		app.UseRouting();
 
+		app.UseAuthentication();
 		app.UseAuthorization();
 
 		app.MapControllerRoute(

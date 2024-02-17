@@ -50,7 +50,7 @@ csharp_new_line_before_members_in_object_initializers = true
 csharp_new_line_before_members_in_anonymous_types = true
 
 # Namespace settings
-csharp_style_namespace_declarations = file_scoped:silent
+csharp_style_namespace_declarations = file_scoped:warning
 
 # Brace settings
 csharp_prefer_braces = true:silent# Prefer curly braces even for one line of code
@@ -85,6 +85,7 @@ csharp_style_expression_bodied_indexers = true:silent
 csharp_style_expression_bodied_accessors = true:silent
 csharp_style_expression_bodied_lambdas = true:silent
 csharp_style_expression_bodied_local_functions = false:silent
+csharp_space_around_binary_operators = before_and_after
 
 [*.{xml,config,*proj,nuspec,props,resx,targets,yml,tasks}]
 indent_size = 2
@@ -245,7 +246,7 @@ dotnet_diagnostic.CA1857.severity = warning
 dotnet_diagnostic.CA1858.severity = warning
 
 # CA2007: Consider calling ConfigureAwait on the awaited task
-dotnet_diagnostic.CA2007.severity = warning
+dotnet_diagnostic.CA2007.severity = none
 
 # CA2008: Do not create tasks without passing a TaskScheduler
 dotnet_diagnostic.CA2008.severity = warning
@@ -337,7 +338,7 @@ dotnet_diagnostic.IDE0060.severity = warning
 dotnet_diagnostic.IDE0062.severity = warning
 
 # IDE0073: File header
-dotnet_diagnostic.IDE0073.severity = warning
+dotnet_diagnostic.IDE0073.severity = none
 file_header_template = Licensed to the .NET Foundation under one or more agreements.\nThe .NET Foundation licenses this file to you under the MIT license.
 
 # IDE0161: Convert to file-scoped namespace
@@ -488,3 +489,4 @@ dotnet_style_qualification_for_field = false:suggestion
 dotnet_style_qualification_for_property = false:suggestion
 dotnet_style_qualification_for_method = true:warning
 dotnet_style_qualification_for_event = true:warning
+dotnet_style_namespace_match_folder = true:suggestion

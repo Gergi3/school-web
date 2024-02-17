@@ -1,0 +1,16 @@
+﻿@model PublisherViewModel;
+
+<h1 class="text-center">Add publisher</h1>
+<form asp-controller="Publishers" asp-action="Add">
+    <div class="mb-3 col-4">
+        <label class="form-label" asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+        <span class="small text-danger" asp-validation-for="Name" />
+    </div>
+
+    <input class="btn btn-primary" type="submit" />
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

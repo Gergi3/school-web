@@ -1,0 +1,73 @@
+﻿@using BooksApp.Extensions;
+@model IEnumerable<BookViewModel>
+
+@{
+    ViewBag.Title = "All books";
+    ViewBag.Checked ??= "all";
+    string[] search = ["all", "read", "unread"];
+}
+
+@section Scripts {
+    <script defer src="~/js/books-index.js"></script>
+}
+
+@if (User?.Identity?.IsAuthenticated ?? false)
+{
+    <div class="row border border-1 mb-3 p-4">
+        <h2>Search:</h2>
+        <form method="get" asp-controller="Books" asp-action="Index" id="search-query">
+            @foreach (var item in search)
+            {
+                <div class="form-check ms-4">
+                    <input class="form-check-input"
+                           type="radio"
+                           name="query"
+                           value="@item"
+                           id="@item"
+                           checked="@(ViewBag.Checked == @item)" />
+                    <label class="form-check-label" for=@item>@item.ToCapitalized()</label>
+                </div>
+            }
+        </form>
+    </div>
+}
+<div class="text-center row gap-2 justify-content-center">
+    @foreach (var book in Model)
+    {
+        <div class="card col-3" style="width: 20rem;">
+            <img class="card-img-top" src="@book.ImageUrl" height="350" alt="Book Image">
+            <div class="card-body">
+                <h5 class="card-title mt-1">@book.Title</h5>
+                <p class="mb-0">Author: @book.Author</p>
+                <p class="mb-0">ISBN: @book.ISBN</p>
+                <p class="mb-0">Year: @book.Year</p>
+                <p>Publisher: @book.PublisherName</p>
+            </div>
+            @if (User != null && (User.IsInRole("User") || User.IsInRole("Admin")))
+            {
+                <form class="input-group-sm"
+                      method="post"
+                      asp-controller="Books">
+
+                    <input type="hidden" name="bookId" value="@book.Id" />
+                    <input type="hidden" name="query" value="@ViewBag.Checked" />
+
+                    @if (!book.IsRead)
+                    {
+                        <input type="submit"
+                               value="Mark as read"
+                               class="fs-6 btn btn-success mb-3 p-2"
+                               asp-action="Read" />
+                    }
+                    else
+                    {
+                        <input type="submit"
+                               value="Remove from read"
+                               class="fs-6 btn btn-danger mb-3 p-2"
+                               asp-action="Unread" />
+                    }
+                </form>
+            }
+        </div>
+    }
+</div>

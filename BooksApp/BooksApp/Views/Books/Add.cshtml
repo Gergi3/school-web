@@ -1,0 +1,42 @@
+﻿@model BookViewModel;
+
+<h1 class="text-center">Add book</h1>
+
+<form asp-controller="Books" asp-action="Add">
+    <div class="mb-3 col-4">
+        <label class="form-label" asp-for="Title"></label>
+        <input class="form-control" asp-for="Title" />
+        <span class="small text-danger" asp-validation-for="Title" />
+    </div>
+    <div class="mb-3 col-4">
+        <label class="form-label" asp-for="Year"></label>
+        <input class="form-control" type="number" asp-for="Year" />
+        <span class="small text-danger" asp-validation-for="Year" />
+    </div>
+    <div class="mb-3 col-4">
+        <label class="form-label" asp-for="Author"></label>
+        <input class="form-control" asp-for="Author" />
+        <span class="small text-danger" asp-validation-for="Author" />
+    </div>
+    <div class="mb-3 col-4">
+        <label class="form-label" asp-for="ISBN"></label>
+        <input class="form-control" asp-for="ISBN" />
+        <span class="small text-danger" asp-validation-for="ISBN" />
+    </div>
+    <div class="mb-3 col-4">
+        <label class="form-label" asp-for="ImageUrl"></label>
+        <input class="form-control" asp-for="ImageUrl" />
+        <span class="small text-danger" asp-validation-for="ImageUrl" />
+    </div>
+    <div class="mb-3 col-4">
+        <label class="form-label" asp-for="PublisherId">Publisher</label>
+        <select class="form-select" asp-items="ViewBag.PublishersList" asp-for="PublisherId"></select>
+        <span class="small text-danger" asp-validation-for="PublisherId" />
+    </div>
+
+    <input class="btn btn-primary" type="submit" />
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

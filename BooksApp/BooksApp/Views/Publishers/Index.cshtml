@@ -1,0 +1,26 @@
+﻿@model IEnumerable<PublisherViewModel>
+
+@{
+    ViewBag.Title = "All books";
+}
+
+<div class="row">
+    <h1 class="text-center">Publishers</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <td width="400">@book.Id</td>
+                    <td>@book.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
